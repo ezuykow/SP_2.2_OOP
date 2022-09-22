@@ -1,32 +1,45 @@
-import java.time.LocalDate;
-import java.util.Date;
-
 public class Main {
     public static void main(String[] args) {
-        Human maxim = new Human();
-        maxim.name = "Maxim";
-        maxim.city = "Minsk";
-        maxim.jobTitle = "brand manager";
-        maxim.yearOfBirth = LocalDate.now().getYear() - 35;
+        Car lada = new Car();
+        lada.brand = "Lada";
+        lada.model = "Grande";
+        lada.yearOfProduction = 2015;
+        lada.assemblyCountry = "Russia";
+        lada.color = "yellow";
+        lada.engineVolume = 1.7F;
 
-        Human anya = new Human();
-        anya.name = "Anya";
-        anya.city = "Moscow";
-        anya.jobTitle = "methodologist of education programs";
-        anya.yearOfBirth = LocalDate.now().getYear() - 29;
+        Car audi = new Car();
+        audi.brand = "Audi";
+        audi.model = "A8 50 L TDI quattro";
+        audi.yearOfProduction = 2020;
+        audi.assemblyCountry = "Germany";
+        audi.color = "black";
+        audi.engineVolume = 3.0F;
 
-        Human katya = new Human();
-        katya.name = "Katya";
-        katya.city = "Kaliningrad";
-        katya.jobTitle = "product manager";
-        katya.yearOfBirth = LocalDate.now().getYear() - 28;
+        Car bmw = new Car();
+        bmw.brand = "BMW";
+        bmw.model = "Z8";
+        bmw.assemblyCountry = "Germany";
+        bmw.yearOfProduction = 2021;
+        bmw.color = "black";
+        bmw.engineVolume = 3.0F;
 
-        Human artyom = new Human();
-        artyom.name = "Artyom";
-        artyom.city = "Moscow";
-        artyom.jobTitle = "director of business development";
-        artyom.yearOfBirth = LocalDate.now().getYear() - 27;
+        Car kia =  new Car();
+        kia.brand = "Kia";
+        kia.model = "Sportage mk4";
+        kia.yearOfProduction = 2018;
+        kia.assemblyCountry = "South Korea";
+        kia.color = "red";
+        kia.engineVolume = 2.4F;
 
-        maxim.sayHello();
+        Car hyundai = new Car();
+        hyundai.brand = "Hyundai";
+        hyundai.model = "Avante";
+        hyundai.assemblyCountry = "South Korea";
+        hyundai.color = "orange";
+        hyundai.engineVolume = 1.6F;
+        hyundai.yearOfProduction = 2016;
+
+        System.out.printf("%s\n%s\n%s\n%s\n%s\n", lada, audi, bmw, kia, hyundai);
     }
 }

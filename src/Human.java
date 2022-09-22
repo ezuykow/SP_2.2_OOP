@@ -4,11 +4,16 @@ public class Human {
     String jobTitle;
     int yearOfBirth;
 
+    public Human(String name, String city, String jobTitle, int yearOfBirth) {
+        this.name = name;
+        this.city = city;
+        this.jobTitle = jobTitle;
+        this.yearOfBirth = yearOfBirth;
+    }
+
     void sayHello() {
-        System.out.println("Hello! My name is " + name +
-                ". I`m from " + city +
-                ". I`m was born in " + yearOfBirth +
-                ". I`m working as " + jobTitle +
-                ". Let`s get acquainted!");
+        System.out.printf("Hello! My name is %s. I`m from %s. I`m was born in %d." +
+                " I`m working as %s. Let`s get acquainted!\n",
+                name, city, yearOfBirth, jobTitle);
     }
 }

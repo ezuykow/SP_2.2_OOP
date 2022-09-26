@@ -1,20 +1,45 @@
+import transport.Car;
+
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        Car lada = new Car("Lada", "Grande", "yellow",
-                "Russia", 2015, 1.7F);
+        List<Car> cars = getCars();
+        cars.forEach(c -> System.out.printf("%s\n", c));
+    }
 
-        Car audi = new Car("Audi", "A8 50 L TDI quattro", "black",
-                "Germany", 2020, 3.0F);
+    private static List<Car> getCars() {
+        List<Car> cars = new ArrayList<>();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd");
 
-        Car bmw = new Car("BMW", "Z8", "black",
-                "Germany",  2021, 3.0F);
+        Car temp = new Car("Lada", "Grande", "Russia",
+                "coupe", 4, 2015, "white",
+                "auto", "x001cb777",0, 1.7F);
+        temp.setKey(new Car.Key(true, true));
+        temp.setInsurance(temp.new Insurance(12000, "156363671", LocalDate.parse("2021-11-10", dtf)));
+        cars.add(temp);
 
-        Car kia =  new Car("Kia", "Sportage mk4", "red",
-                "South Korea", 2018, 2.4F);
+        temp = new Car("Audi", "A8 50 L TDI quattro", "Germany",
+                "coupe", 4, 2020, "black",
+                "auto", "b777op777", 0, 3.0F);
+        temp.setKey(new Car.Key(true, true));
+        temp.setInsurance(temp.new Insurance(12000, "156363671", LocalDate.parse("2021-11-10", dtf)));
+        cars.add(temp);
 
-        Car hyundai = new Car("Hyundai", "Avante", "orange",
-                "South Korea", 2016, 1.6F);
+        temp = new Car("Audi", "A8 50 L TDI quattro", "Germany",
+                "coupe", 4, 2020, "black",
+                "auto", "b777op777", 0, 3.0F);
+        temp.setKey(new Car.Key(true, true));
+        temp.setInsurance(temp.new Insurance(12000, "156363671", LocalDate.parse("2021-11-10", dtf)));
+        cars.add(temp);
 
-        System.out.printf("%s\n%s\n%s\n%s\n%s\n", lada, audi, bmw, kia, hyundai);
+        cars.add(temp);
+
+        return cars;
     }
 }

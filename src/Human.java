@@ -1,12 +1,12 @@
 import java.sql.Struct;
 
 public class Human {
-    String name;
-    String city;
-    String jobTitle;
-    int yearOfBirth;
+    private String name;
+    private String city;
+    private String jobTitle;
+    private int yearOfBirth;
 
-    private static String d = "<no info>"; //default value
+    private final static String d = "<no info>"; //default value
     public Human() {
         this(d, d, d, 0);
     }
@@ -33,9 +33,45 @@ public class Human {
 
     public Human(String name, String city, String jobTitle, int yearOfBirth) {
         this.name = name;
-        this.city = city;
         this.jobTitle = jobTitle;
-        this.yearOfBirth = Math.max(yearOfBirth, 0);
+        setCity(city);
+        setYearOfBirth(yearOfBirth);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        if ((city != null) && (!city.isEmpty()) && (!city.isBlank())) {
+            this.city = city;
+        } else {
+            this.city = d;
+        }
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public int getYearOfBirth() {
+        return yearOfBirth;
+    }
+
+    public void setYearOfBirth(int yearOfBirth) {
+            this.yearOfBirth = Math.max(yearOfBirth, 0);
     }
 
     void sayHello() {

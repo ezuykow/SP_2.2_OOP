@@ -1,6 +1,9 @@
 package animals.amphibians;
 
 import animals.Animal;
+import animals.mammals.predators.Predator;
+
+import java.util.Objects;
 
 public class Amphibian extends Animal {
 
@@ -41,5 +44,17 @@ public class Amphibian extends Animal {
                 getName() +
                 ", age - " + getAge() +
                 ", habitat - " + getHabitat();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Amphibian predator = (Amphibian) o;
+
+        return Objects.equals(getName(), predator.getName())
+                && Objects.equals(getAge(), predator.getAge())
+                && Objects.equals(getHabitat(), predator.getHabitat());
     }
 }

@@ -2,6 +2,8 @@ package animals.mammals.predators;
 
 import animals.mammals.Mammal;
 
+import java.util.Objects;
+
 public class Predator extends Mammal {
 
     private String foodType;
@@ -38,5 +40,19 @@ public class Predator extends Mammal {
                 ", habitat - " + getHabitat() +
                 ", move speed - " + getMoveSpeed() +
                 ", food type - " + getFoodType();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Predator predator = (Predator) o;
+
+        return Objects.equals(getFoodType(), predator.getFoodType())
+                && Objects.equals(getName(), predator.getName())
+                && Objects.equals(getAge(), predator.getAge())
+                && Objects.equals(getHabitat(), predator.getHabitat())
+                && Objects.equals(getMoveSpeed(), predator.getMoveSpeed());
     }
 }

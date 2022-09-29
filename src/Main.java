@@ -1,119 +1,117 @@
-import transport.Bus;
-import transport.Car;
-import transport.Train;
-import transport.Transport;
-import transport.refill.DieselRefill;
-import transport.refill.ElectricRefill;
-import transport.refill.GasRefill;
+import animals.Animal;
+import animals.amphibians.Amphibian;
+import animals.birds.Bird;
+import animals.birds.flying.FlyingBird;
+import animals.birds.noflying.NoFlyingBird;
+import animals.mammals.herbivore.Herbivore;
+import animals.mammals.predators.Predator;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        List<Transport> transports;
+        List<Animal> animals;
 
-        System.out.println("Cars:");
-        transports = getCars();
-        transports.forEach(c -> {
-            System.out.println(c);
-            c.refill();
-        });
+        animals = getFlyingBirds();
+        animals.forEach(System.out::println);
 
-        System.out.println("\nTrains:");
-        transports = getTrains();
-        transports.forEach(c -> {
-            System.out.println(c);
-            c.refill();
-        });
+        System.out.println("\n");
+        animals = getNoFlyingBirds();
+        animals.forEach(System.out::println);
 
-        System.out.println("\nBuses:");
-        transports = getBuses();
-        transports.forEach(c -> {
-                System.out.println(c);
-                c.refill();
-        });
+        System.out.println("\n");
+        animals = getAmphibians();
+        animals.forEach(System.out::println);
+
+        System.out.println("\n");
+        animals = getHerbivore();
+        animals.forEach(System.out::println);
+
+        System.out.println("\n");
+        animals = getPredators();
+        animals.forEach(System.out::println);
     }
 
-    private static List<Transport> getCars() {
-        List<Transport> cars = new ArrayList<>();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+    private static List<Animal> getPredators() {
+        Predator an;
+        List<Animal> a = new ArrayList<>();
 
-        Car temp = new Car("Lada", "Grande", "Russia",
-                "coupe", 4, 2015, "white",
-                "auto", "x001cb777",0, 1.7F, 160);
-        temp.setKey(new Car.Key(true, true));
-        temp.setInsurance(new Car.Insurance(12000, "156348572", LocalDate.parse("2021-11-10", dtf)));
-        temp.setRefillBehavior(new ElectricRefill());
-        cars.add(temp);
+        an = new Predator("Tiger", 3, "jungle", 50, "meat");
+        a.add(an);
 
-        temp = new Car("Audi", "A8 50 L TDI quattro", "Germany",
-                "coupe", 4, 2020, "yellow",
-                "auto", "b342tt152", 0, 3.0F, 220);
-        temp.setKey(new Car.Key(true, true));
-        temp.setInsurance(new Car.Insurance(12000, "156363671", LocalDate.parse("2021-11-10", dtf)));
-        temp.setRefillBehavior(new GasRefill());
-        cars.add(temp);
+        an = new Predator("Bear", 5, "forest", 80, "meat");
+        a.add(an);
 
-        temp = new Car("Audi", "A8 50 L TDI quattro", "Germany",
-                "coupe", 4, 2020, "black",
-                "auto", "b777ec76", 0, 3.0F, 220);
-        temp.setKey(new Car.Key(true, true));
-        temp.setInsurance(new Car.Insurance(12000, "156363098", LocalDate.parse("2021-11-10", dtf)));
-        temp.setRefillBehavior(new GasRefill());
-        cars.add(temp);
+        an = new Predator("Hyena", 2, "desert", 70, "meat");
+        a.add(an);
 
-        temp = new Car("Audi", "A8 50 L TDI quattro", "Germany",
-                "coupe", 4, 2020, "black",
-                "auto", "b067ep67", 0, 3.0F, 220);
-        temp.setKey(new Car.Key(true, true));
-        temp.setInsurance(new Car.Insurance(12000, "156363546", LocalDate.parse("2021-11-10", dtf)));
-        temp.setRefillBehavior(new DieselRefill());
-        cars.add(temp);
-
-        return cars;
+        an = null;
+        return a;
     }
 
-    private static List<Transport> getTrains() {
-        Train train;
-        List<Transport> trains = new ArrayList<>();
+    private static List<Animal> getHerbivore() {
+        Herbivore an;
+        List<Animal> a = new ArrayList<>();
 
-        train = new Train("Martin" , "B-901", 2011, "Russia",
-                null, 301, 3500, 0, "Belorussian RS",
-                "Minsk-Pass", 11);
-        trains.add(train);
+        an = new Herbivore("Horse", 5, "fields", 40, "grass");
+        a.add(an);
 
-        train = new Train("Leningrad", "D-125", 2019, "Russia",
-                null, 270, 1700, 0, "Leningrad`s RS",
-                "Leningrad-Pass", 8);
-        trains.add(train);
+        an = new Herbivore("Giraffe", 3, "desert", 20, "leafs");
+        a.add(an);
 
-        train = null;
-        return trains;
+        an = new Herbivore("Gazelle", 1, "fields", 60, "grass");
+        a.add(an);
+
+        an = null;
+        return a;
     }
 
-    private static List<Transport> getBuses() {
-        List<Transport> buses = new ArrayList<>();
-        Bus bus;
+    private static List<Animal> getFlyingBirds() {
+        Bird bird;
+        List<Animal> a = new ArrayList<>();
 
-        bus = new Bus("Icarus", "T-200", 2001, "Russia",
-                "white", 80);
-        bus.setRefillBehavior(new DieselRefill());
-        buses.add(bus);
+        bird = new FlyingBird("Gull", 2, "beach", "fly");
+        a.add(bird);
 
-        bus = new Bus("Icarus", "T-200", 2005, "Russia",
-                "white", 90);
-        bus.setRefillBehavior(new GasRefill());
-        buses.add(bus);
+        bird = new FlyingBird("Albatros", 1, "sea", "fly");
+        a.add(bird);
 
-        bus = new Bus("Icarus", "T-200", 2010, "Russia",
-                "white", 100);
-        bus.setRefillBehavior(new GasRefill());
-        buses.add(bus);
+        bird = new FlyingBird("Falcon", 3, "field", "fly");
+        a.add(bird);
 
-        bus = null;
-        return buses;
+        bird = null;
+        return a;
+    }
+
+    private static List<Animal> getNoFlyingBirds() {
+        Bird bird;
+        List<Animal> a = new ArrayList<>();
+
+        bird = new NoFlyingBird("Peacock", 1, "desert", "on foot");
+        a.add(bird);
+
+        bird = new NoFlyingBird("Penguin", 2, "glacier", "on foot");
+        a.add(bird);
+
+        bird = new NoFlyingBird("dodo", 0, "fields", "on foot");
+        a.add(bird);
+
+        bird = null;
+        return a;
+    }
+
+    private static List<Animal> getAmphibians() {
+        Amphibian amph;
+        List<Animal> a = new ArrayList<>();
+
+        amph = new Amphibian("Frog", 1, "river");
+        a.add(amph);
+
+        amph = new Amphibian("Freshwater snake", 1, "river");
+        a.add(amph);
+
+        amph = null;
+        return a;
     }
 }

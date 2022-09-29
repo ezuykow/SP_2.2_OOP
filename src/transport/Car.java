@@ -4,12 +4,12 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-public class Car {
+public class Car extends  Transport{
 
     public static class Key {
+
         private final boolean distLaunch;
         private final boolean keylessEntry;
-
         public Key(boolean distLaunch, boolean keylessEntry) {
             this.distLaunch = distLaunch;
             this.keylessEntry = keylessEntry;
@@ -22,14 +22,14 @@ public class Car {
         public boolean isKeylessEntry() {
             return keylessEntry;
         }
-    }
 
-    public class Insurance {
+    }
+    public static class Insurance {
 
         private double cost;
-        private String number;
-        private LocalDate validity;
 
+        private String number;
+        private final LocalDate validity;
         public Insurance(double cost, String number, LocalDate validity) {
             this.validity = validity;
             if (cost >= 0) {
@@ -49,10 +49,10 @@ public class Car {
                 System.out.println("You need to get new insurance!");
             }
         }
+
         public double getCost() {
             return cost;
         }
-
         public String getNumber() {
             return number;
         }
@@ -60,34 +60,25 @@ public class Car {
         public LocalDate getValidity() {
             return validity;
         }
-    }
 
-    private final String brand;
-    private final String model;
-    private final String assemblyCountry;
-    private final String bodyType;
-    private final int numSeats;
-    private final int yearOfProduction;
-    private String color;
+    }
+    private String bodyType;
+
+    private int numSeats;
     private String transmission;
     private String regNum;
     private int wheels; //0 - for summer, 1 - for winter
     private float engineVolume;
-
     private Key key;
+
     private Insurance insurance;
-    private static final String d = "<default>"; //default value
-    private static final String RIGHT_REG_NUM = "[a-z]\\d{3}[a-z]{2}\\d{2,3}";
 
     public Car(String brand, String model, String assemblyCountry, String bodyType, int numSeats,
                int yearOfProduction, String color, String transmission, String regNum, int wheels,
-               float engineVolume) {
-        this.brand = brand;
-        this.model = model;
-        this.assemblyCountry = assemblyCountry;
-        this.bodyType = bodyType;
-        this.numSeats = numSeats;
-        this.yearOfProduction = yearOfProduction;
+               float engineVolume, int maxSpeed) {
+        super(brand, model, yearOfProduction, assemblyCountry, color, maxSpeed);
+        setBodyType(bodyType);
+        setNumSeats(numSeats);
         setColor(color);
         setTransmission(transmission);
         setRegNum(regNum);
@@ -95,39 +86,27 @@ public class Car {
         setEngineVolume(engineVolume);
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public String getAssemblyCountry() {
-        return assemblyCountry;
+    @Override
+    public void refill() {
+        getRefillBehavior().refill();
     }
 
     public String getBodyType() {
         return bodyType;
     }
 
+    private void setBodyType(String bt) {
+        this.bodyType = ((bt == null) || (bt.isBlank()) || (bt.isEmpty()))
+                ? d
+                : bt;
+    }
+
     public int getNumSeats() {
         return numSeats;
     }
 
-    public int getYearOfProduction() {
-        return yearOfProduction;
-    }
-
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = ((color == null) || (color.isEmpty()) || (color.isBlank()))
-                ? d
-                : color;
+    private void setNumSeats(int ns) {
+        this.numSeats = Math.max(ns, 1);
     }
 
     public String getTransmission() {
@@ -192,18 +171,18 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car{" +
-                "brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", assemblyCountry='" + assemblyCountry + '\'' +
-                ", bodyType='" + bodyType + '\'' +
-                ", numSeats=" + numSeats +
-                ", yearOfProduction=" + yearOfProduction +
-                ", color='" + color + '\'' +
-                ", transmission='" + transmission + '\'' +
-                ", regNum='" + regNum + '\'' +
-                ", wheels=" + wheels +
-                ", engineVolume=" + engineVolume +
-                '}';
+        return "Car: " +
+                getBrand() + " " +
+                getModel() +
+                ", produced in " + getAssemblyCountry() +
+                ", body type - " + bodyType +
+                ", number of seats - " + numSeats +
+                ", year of production " + getYearOfProduction() +
+                ", color - " + getColor() +
+                ", transmission - " + transmission +
+                ", reg. number - " + regNum +
+                ", wheels - " + ((wheels == 0) ? "for winter" : "for summer") +
+                ", engine volume - " + engineVolume +
+                ", insurance num. - " + insurance.getNumber();
     }
 }

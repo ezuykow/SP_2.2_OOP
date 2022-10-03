@@ -1,92 +1,47 @@
 package transport;
 
-import transport.refill.RefillBehavior;
-
 public abstract class Transport {
-    public static final String d = "<default>"; //default value
-    public static final String RIGHT_REG_NUM = "[a-z]\\d{3}[a-z]{2}\\d{2,3}";
+    private static final String DEFAUL_VALUE = "<no info>";
+
     private String brand;
-    private  String model;
-    private int yearOfProduction;
-    private String assemblyCountry;
-    private String color;
-    private int maxSpeed;
+    private String model;
+    private float engineVolume;
 
-    private RefillBehavior refillBehavior;
-
-    public Transport(String brand, String model, int yearOfProduction,
-                     String assemblyCountry, String color, int maxSpeed) {
+    protected Transport(String brand, String model, float engineVolume) {
         setBrand(brand);
         setModel(model);
-        setYearOfProduction(yearOfProduction);
-        setAssemblyCountry(assemblyCountry);
-        setColor(color);
-        setMaxSpeed(maxSpeed);
+        setEngineVolume(engineVolume);
     }
 
-    public abstract void refill();
+    protected abstract void startMoving();
 
-    public void setRefillBehavior(RefillBehavior refillBehavior) {
-        this.refillBehavior = refillBehavior;
-    }
-
-    public RefillBehavior getRefillBehavior() {
-        return refillBehavior;
-    }
-
-    private void setBrand(String brand) {
-        this.brand = ((brand == null) || (brand.isEmpty()) || (brand.isBlank()))
-                ? d
-                : brand;
-    }
+    protected abstract void endMoving();
 
     public String getBrand() {
         return brand;
     }
 
-    private void setModel(String model) {
-        this.model = ((model == null) || (model.isEmpty()) || (model.isBlank()))
-                ? d
-                : model;
+    private void setBrand(String brand) {
+        this.brand = ((brand == null) || (brand.isBlank()))
+                ? DEFAUL_VALUE
+                : brand;
     }
 
     public String getModel() {
         return model;
     }
 
-    public void setYearOfProduction(int y) {
-        this.yearOfProduction = Math.max(y, 0);
+    public void setModel(String model) {
+        this.model = ((model == null) || (model.isBlank()))
+                ? DEFAUL_VALUE
+                : model;
     }
 
-    public int getYearOfProduction() {
-        return yearOfProduction;
+    public float getEngineVolume() {
+        return engineVolume;
     }
 
-    public void setAssemblyCountry(String a) {
-        this.assemblyCountry = ((a == null) || (a.isBlank()) || (a.isEmpty()))
-                ? d
-                : a;
-    }
-
-    public String getAssemblyCountry() {
-        return assemblyCountry;
-    }
-
-    public void setColor(String c) {
-        this.color = ((c == null) || (c.isEmpty()) || (c.isBlank()))
-                ? "white"
-                : c;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setMaxSpeed(int ms) {
-        this.maxSpeed = Math.max(ms, 0);
-    }
-
-    public int getMaxSpeed() {
-        return maxSpeed;
+    public void setEngineVolume(float engineVolume) {
+        this.engineVolume = Math.max(engineVolume, 0.5F);
     }
 }

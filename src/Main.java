@@ -1,119 +1,75 @@
-import transport.Bus;
-import transport.Car;
-import transport.Train;
+import competition.Competing;
+import driver.Driver;
 import transport.Transport;
-import transport.refill.DieselRefill;
-import transport.refill.ElectricRefill;
-import transport.refill.GasRefill;
+import transport.bus.Bus;
+import transport.car.Car;
+import transport.truck.Truck;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Main {
     public static void main(String[] args) {
-        List<Transport> transports;
 
-        System.out.println("Cars:");
-        transports = getCars();
-        transports.forEach(c -> {
-            System.out.println(c);
-            c.refill();
+        List<Competing> transport = new ArrayList<>();
+        transport.addAll(getCars());
+        transport.addAll(getTrucks());
+        transport.addAll(getBuses());
+
+        transport.forEach(t -> {
+            t.pitStop();
+            t.maxSpeed();
+            t.bestLapTime();
         });
 
-        System.out.println("\nTrains:");
-        transports = getTrains();
-        transports.forEach(c -> {
-            System.out.println(c);
-            c.refill();
-        });
+        Driver<Car> driver1 = new Driver<>("Ivan", 'B', 3, (Car) transport.get(0));
+        Driver<Truck> driver2 = new Driver<>("Mike", 'C', 1, (Truck) transport.get(5));
+        Driver<Bus> driver3 = new Driver<>("Kate", 'D', 1, (Bus) transport.get(10));
 
-        System.out.println("\nBuses:");
-        transports = getBuses();
-        transports.forEach(c -> {
-                System.out.println(c);
-                c.refill();
-        });
+        System.out.println();
+        writeRacerInfo(driver1);
+        writeRacerInfo(driver2);
+        writeRacerInfo(driver3);
     }
 
-    private static List<Transport> getCars() {
-        List<Transport> cars = new ArrayList<>();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+    private static List<Competing> getCars() {
+        List<Competing> cars = new ArrayList<>();
 
-        Car temp = new Car("Lada", "Grande", "Russia",
-                "coupe", 4, 2015, "white",
-                "auto", "x001cb777",0, 1.7F, 160);
-        temp.setKey(new Car.Key(true, true));
-        temp.setInsurance(new Car.Insurance(12000, "156348572", LocalDate.parse("2021-11-10", dtf)));
-        temp.setRefillBehavior(new ElectricRefill());
-        cars.add(temp);
-
-        temp = new Car("Audi", "A8 50 L TDI quattro", "Germany",
-                "coupe", 4, 2020, "yellow",
-                "auto", "b342tt152", 0, 3.0F, 220);
-        temp.setKey(new Car.Key(true, true));
-        temp.setInsurance(new Car.Insurance(12000, "156363671", LocalDate.parse("2021-11-10", dtf)));
-        temp.setRefillBehavior(new GasRefill());
-        cars.add(temp);
-
-        temp = new Car("Audi", "A8 50 L TDI quattro", "Germany",
-                "coupe", 4, 2020, "black",
-                "auto", "b777ec76", 0, 3.0F, 220);
-        temp.setKey(new Car.Key(true, true));
-        temp.setInsurance(new Car.Insurance(12000, "156363098", LocalDate.parse("2021-11-10", dtf)));
-        temp.setRefillBehavior(new GasRefill());
-        cars.add(temp);
-
-        temp = new Car("Audi", "A8 50 L TDI quattro", "Germany",
-                "coupe", 4, 2020, "black",
-                "auto", "b067ep67", 0, 3.0F, 220);
-        temp.setKey(new Car.Key(true, true));
-        temp.setInsurance(new Car.Insurance(12000, "156363546", LocalDate.parse("2021-11-10", dtf)));
-        temp.setRefillBehavior(new DieselRefill());
-        cars.add(temp);
+        cars.add(new Car("Lada", "Granta", 1.6F));
+        cars.add(new Car("Ford", "Focus ST", 2.0F));
+        cars.add(new Car("Ford", "Mondeo Mk5", 2.5F));
+        cars.add(new Car("Ford", "F-150 Raptor", 7.2F));
 
         return cars;
     }
 
-    private static List<Transport> getTrains() {
-        Train train;
-        List<Transport> trains = new ArrayList<>();
+    private static List<Competing> getTrucks() {
+        List<Competing> trucks = new ArrayList<>();
 
-        train = new Train("Martin" , "B-901", 2011, "Russia",
-                null, 301, 3500, 0, "Belorussian RS",
-                "Minsk-Pass", 11);
-        trains.add(train);
+        trucks.add(new Truck("KAMAZ", "53501", 6.0F));
+        trucks.add(new Truck("KAMAZ", "4310", 6.0F));
+        trucks.add(new Truck("KAMAZ", "5350", 6.0F));
+        trucks.add(new Truck("KAMAZ", "4350", 6.0F));
 
-        train = new Train("Leningrad", "D-125", 2019, "Russia",
-                null, 270, 1700, 0, "Leningrad`s RS",
-                "Leningrad-Pass", 8);
-        trains.add(train);
-
-        train = null;
-        return trains;
+        return trucks;
     }
 
-    private static List<Transport> getBuses() {
-        List<Transport> buses = new ArrayList<>();
-        Bus bus;
+    private static List<Competing> getBuses() {
+        List<Competing> buses = new ArrayList<>();
 
-        bus = new Bus("Icarus", "T-200", 2001, "Russia",
-                "white", 80);
-        bus.setRefillBehavior(new DieselRefill());
-        buses.add(bus);
+        buses.add(new Bus("Icarus", "T-200", 4.5F));
+        buses.add(new Bus("Icarus", "T-300", 5.0F));
+        buses.add(new Bus("Icarus", "T-400", 5.5F));
+        buses.add(new Bus("Icarus", "T-500", 7.0F));
 
-        bus = new Bus("Icarus", "T-200", 2005, "Russia",
-                "white", 90);
-        bus.setRefillBehavior(new GasRefill());
-        buses.add(bus);
-
-        bus = new Bus("Icarus", "T-200", 2010, "Russia",
-                "white", 100);
-        bus.setRefillBehavior(new GasRefill());
-        buses.add(bus);
-
-        bus = null;
         return buses;
+    }
+
+    private static void writeRacerInfo(Driver<? extends Transport> d) {
+        System.out.printf("Driver %s drives transport %s %s and will participate in the race!\n",
+                d.getName(),
+                d.getTransport().getBrand(),
+                d.getTransport().getModel());
     }
 }

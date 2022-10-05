@@ -5,8 +5,11 @@ import transport.Transport;
 
 public class Bus extends Transport implements Competing {
 
-    public Bus(String brand, String model, float engineVolume) {
+    private final PayloadClass payload;
+
+    public Bus(String brand, String model, float engineVolume, PayloadClass payload) {
         super(brand, model, engineVolume);
+        this.payload = payload;
     }
 
     @Override
@@ -42,5 +45,9 @@ public class Bus extends Transport implements Competing {
         System.out.printf("The best lap time of %s %s is <no info>\n",
                 getBrand(),
                 getModel());
+    }
+
+    public PayloadClass getPayload() {
+        return payload;
     }
 }

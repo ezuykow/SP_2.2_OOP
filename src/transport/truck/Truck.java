@@ -6,8 +6,11 @@ import transport.Transport;
 
 public class Truck extends Transport implements Competing {
 
-    public Truck(String brand, String model, float engineVolume) {
+    private final LoadCapacity loadCapacity;
+
+    public Truck(String brand, String model, float engineVolume, LoadCapacity loadCapacity) {
         super(brand, model, engineVolume);
+        this.loadCapacity = loadCapacity;
     }
 
     @Override
@@ -43,5 +46,9 @@ public class Truck extends Transport implements Competing {
         System.out.printf("The best lap time of %s %s is <no info>\n",
                 getBrand(),
                 getModel());
+    }
+
+    public LoadCapacity getLoadCapacity() {
+        return loadCapacity;
     }
 }

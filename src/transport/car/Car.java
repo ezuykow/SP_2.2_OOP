@@ -5,8 +5,11 @@ import transport.Transport;
 
 public class Car extends Transport implements Competing {
 
-    public Car(String brand, String model, float engineVolume) {
+    private final BodyType bodyType;
+
+    public Car(String brand, String model, float engineVolume, BodyType bodyType) {
         super(brand, model, engineVolume);
+        this.bodyType = bodyType;
     }
 
     @Override
@@ -42,5 +45,9 @@ public class Car extends Transport implements Competing {
         System.out.printf("The best lap time of %s %s is <no info>\n",
                 getBrand(),
                 getModel());
+    }
+
+    public BodyType getBodyType() {
+        return bodyType;
     }
 }

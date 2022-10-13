@@ -47,6 +47,11 @@ public class Bus extends Transport implements Competing {
                 getModel());
     }
 
+    @Override
+    public void diagnostic() {
+        System.out.println("diagnostic not needed");
+    }
+
     public PayloadClass getPayload() {
         return payload;
     }

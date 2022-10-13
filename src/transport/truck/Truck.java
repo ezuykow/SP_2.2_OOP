@@ -48,6 +48,12 @@ public class Truck extends Transport implements Competing {
                 getModel());
     }
 
+    @Override
+    public void diagnostic() {
+        diagnosticCarried = true;
+        System.out.printf("%s %s has been diagnosed\n", getBrand(), getModel());
+    }
+
     public LoadCapacity getLoadCapacity() {
         return loadCapacity;
     }

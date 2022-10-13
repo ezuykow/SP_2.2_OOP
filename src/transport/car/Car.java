@@ -27,6 +27,12 @@ public class Car extends Transport implements Competing {
     }
 
     @Override
+    public void diagnostic() {
+        diagnosticCarried = true;
+        System.out.printf("%s %s has been diagnosed\n", getBrand(), getModel());
+    }
+
+    @Override
     public void pitStop() {
         System.out.printf("%s %s on the pit stop\n",
                 getBrand(),

@@ -6,6 +6,8 @@ public abstract class Transport {
     private String brand;
     private String model;
     private float engineVolume;
+    protected boolean diagnosticCarried;
+
 
     protected Transport(String brand, String model, float engineVolume) {
         setBrand(brand);
@@ -16,6 +18,12 @@ public abstract class Transport {
     protected abstract void startMoving();
 
     protected abstract void endMoving();
+
+    public abstract void diagnostic();
+
+    public boolean getDiagnosticCarried() {
+        return diagnosticCarried;
+    }
 
     public String getBrand() {
         return brand;

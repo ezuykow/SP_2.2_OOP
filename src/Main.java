@@ -1,6 +1,9 @@
 import competition.Competing;
 import driver.Driver;
 import exception.TransportWithoutDiagnostic;
+import mechanic.Mechanic;
+import mechanic.TargetTransport;
+import sponsor.Sponsor;
 import transport.Transport;
 import transport.bus.Bus;
 import transport.bus.PayloadClass;
@@ -44,6 +47,16 @@ public class Main {
             ((Transport) t).diagnostic();
         }
         checkDiagnostic(transport);
+
+        System.out.println();
+        Car lambo = new Car("Lamborghini", "Diablo", 10.0F, BodyType.SEDAN);
+        lambo.setDriver(new Driver<Car>("Shumaher", 'B', 20, lambo));
+        List<Sponsor> s = new ArrayList<>();
+        s.add(new Sponsor("Abramovich", 1000000));
+        lambo.setSponsors(s);
+        List<Mechanic> m = new ArrayList<>();
+        m.add(new Mechanic("Vasya", "Roga&Kopita", new TargetTransport[]{TargetTransport.CAR}));
+        lambo.setMechanics(m);
     }
 
     private static void checkDiagnostic(List<?> transport) {
